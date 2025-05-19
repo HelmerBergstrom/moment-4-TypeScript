@@ -1,1 +1,20 @@
-<p>course-list works!</p>
+<h1> Kurslista </h1>
+
+<section class="course-table">
+    <table>
+        <thead>
+            <th> Kurskod </th>
+            <th> Kursnamn </th>
+            <th> Progression </th>
+            <th> Kursplan </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let course of courses">
+                <td>{{ course.code }}</td>
+                <td>{{ course.coursename }}</td>
+                <td>{{ course.progression }}</td>
+                <td><a [href]="course.syllabus"> LÄNK </a></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
