@@ -1,5 +1,9 @@
 <h1> Kurslista </h1>
 
+<div>
+    <label for="seek"> Filtrera kurser </label>
+    <input type="text" id="seek" [(ngModel)]="filterValue" (input)="filter()" placeholder="Filtrera..."> 
+</div>
 <section class="course-table">
     <table>
         <thead>
@@ -9,7 +13,7 @@
             <th> Kursplan </th>
         </thead>
         <tbody>
-            <tr *ngFor="let course of courses">
+            <tr *ngFor="let course of filteredCourses">
                 <td>{{ course.code }}</td>
                 <td>{{ course.coursename }}</td>
                 <td>{{ course.progression }}</td>
