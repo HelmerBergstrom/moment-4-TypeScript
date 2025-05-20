@@ -4,12 +4,16 @@
     <label for="seek"> Filtrera kurser </label>
     <input type="text" id="seek" [(ngModel)]="filterValue" (input)="filter()" placeholder="Filtrera..."> 
 </div>
+
+<div id="text">
+    <p> Klicka på kolumnrubrikerna för att sortera! </p>
+</div>
 <section class="course-table">
-    <table>
+    <table id="table">
         <thead>
-            <th> Kurskod </th>
-            <th> Kursnamn </th>
-            <th> Progression </th>
+            <th class="tableHeader" (click)="sortBy('code')"> Kurskod {{ sortArrow('code') }} </th>
+            <th class="tableHeader" (click)="sortBy('coursename')"> Kursnamn {{ sortArrow('coursename') }} </th>
+            <th class="tableHeader" (click)="sortBy('progression')"> Progression {{ sortArrow('progression') }}</th>
             <th> Kursplan </th>
         </thead>
         <tbody>
@@ -21,4 +25,9 @@
             </tr>
         </tbody>
     </table>
+    @if(filteredCourses.length === 0) {
+        <p id="error"> Inga kurser matchar sökfrasen! </p>
+    }
+    <br>
+    <br>
 </section>

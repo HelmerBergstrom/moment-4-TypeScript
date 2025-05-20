@@ -54,3 +54,20 @@ input {
     margin-bottom: 20px;
     font-size: 20px;
 }
+#error {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+
+.tableHeader {
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.tableHeader:hover {
+    background-color: #436689;
+}
+#text {
+    color: white;
+    font-weight: bold;
+}
