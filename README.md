@@ -2,6 +2,44 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
 
+
+## Beskrivning av lösningen
+
+Det första jag gjorde var att skapa en komponent vid namn course-list. Denna komponent skapade jag sedan en route för i 
+"app.routes.ts".
+
+Efter detta skapade jag en service för att hämta data från API:et där kurserna lagras. Detta gjordes via httpClient.
+För att kunna använda httpClient lade jag till ```bash provideHttpClient() ``` till app.config-filen.
+
+Datan lagras i interface-strukturen som jag skapade via en ny mapp vid namn "models". Denna mapp skapades via terminalen och som ett interface.
+
+Interfacet ser ut såhär:
+
+```bash
+export interface Courses {
+    code: string,
+    coursename: string,
+    progression: 'A' | 'B',
+    syllabus: string
+};
+```
+Jag gick sedan över till course-list komponenten för och skapade tabellen samt sökrutan för att filtrera innehållet i tabellen. Här lade jag till CommonModule och FormsModule till imports-arrayen.
+
+Därefter började jag skriva kod i klassen i TypeScript-filen i komponenten. 
+
+Jag började med att lagra en variabel för kurserna 
+```bash
+courses: Courses[] = [];
+```
+Efter detta importerade jag min service via constructorn
+
+```bash 
+constructor(private courseListService: CourseListService) {}
+```
+
+
+
+
 ## Development server
 
 To start a local development server, run:
