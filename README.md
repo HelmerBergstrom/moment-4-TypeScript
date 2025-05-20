@@ -27,17 +27,76 @@ Jag gick sedan över till course-list komponenten för och skapade tabellen samt
 
 Därefter började jag skriva kod i klassen i TypeScript-filen i komponenten. 
 
-Jag började med att lagra en variabel för kurserna 
+Jag började med att lagra en variabel för kurserna: 
 ```bash
 courses: Courses[] = [];
 ```
-Efter detta importerade jag min service via constructorn
+Efter detta importerade jag min service via constructorn:
 
 ```bash 
 constructor(private courseListService: CourseListService) {}
 ```
 
+Jag skapade sedan en ngOnInit som anropas när komponenten startas och hämtar kurserna från API:et. Sparar data i courses.
 
+I HTML-tabellen skapade jag thead-element och tbody-element. I tbody, där kurserna ska lagras, använde jag *ngFor i tr-elementet för att loopa igenom kurserna. Kurserna lagras på detta sätt i varsinna tr-element.
+
+Kurserna skrev jag ut genom måsvingar:
+```bash
+{{ course. code }}
+```
+
+Förutom länken till kursplanen som skrevs ut såhär:
+```bash
+<td><a [href]="course.syllabus"> LÄNK </a></td>
+```
+
+### Filtrering 
+
+Jag gick sedan över till arbetet med filtreringen. I sökrutans input-element, använde jag ngModel mot en ny variabel i TS vid namn "filterValue". Detta för att uppdatera denna variabel dynamiskt utifrån användarens input. När användaren matar in något körs även metoden "filter()":
+
+```bash
+<input type="text" id="seek" [(ngModel)]="filterValue" (input)="filter()" placeholder="Filtrera..."> 
+```
+
+Funktonen filter() filtrerar utifrån vad användaren har matat in i sökrutan. Detta görs genom att jämföra användarens input med kurskod och kursnamn, i små bokstäver.
+
+### Sortering
+
+Vid klick på tabellens rubriker ska det sorteras utifrån den kolumnen. För att få till detta skapades funktionen sortBy() och anropas vid klick på varje th-element:
+
+```bash
+<th class="tableHeader" (click)="sortBy('code')"> Kurskod {{ sortArrow('code') }} </th>
+```
+Notera att den skickar med argumentet 'code'. och även att sortArrow('code') skrivs ut.
+
+I metoden sortBy tas argument med för något Courses:
+```bash
+sortBy(column: keyof Courses): void
+```
+
+I metoden används if-satser för att kontrollera om någon sortering finns eller inte. Detta eftersom både stigande och fallande ordning ska fungera. Funktionen kontrollerar även om det är första klicket på ett th-element.
+
+```bash
+if(this.sortCol === column) {
+      this.sortAsc = !this.sortAsc;
+    } else {
+      this.sortCol = column;
+      this.sortAsc = true;
+    }
+```
+Denna if- och else-sats körs först i metoden för att växla mellan stigande och fallande ordning. Stigande är True och fallande är False. Detta fungerar eftersom en variabel är deklarerad i metoden:
+
+```bash
+  sortAsc: boolean = true;
+```
+Denna boolean växlas mellan true och false för att genomföra sortering i olika ordningar.
+
+Efter detta körs en sorteringsfunktion för att konvertera bokstäver till små bokstäver och jämföra kurserna, och därefter sortera utifrån jämförelsen. Detta jämförs med if-sats, större än(>) och mindre än(<).
+
+### Sorteringspilar
+
+Detta skapades relativt enkelt. Pilarna är emojis och körs vid första klicket som en pil nedåt och vid andra klicket som en pil uppåt, men standard är en tom textsträng.
 
 
 ## Development server
